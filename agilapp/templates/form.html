@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Prédiction de Turnover{% endblock %}
+
+{% block content %}
+<h1 class="mb-4" style="color: #D9B300;">Prédiction de Turnover</h1>
+
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label for="sexe" class="form-label">Sexe :</label>
+    <select name="sexe" id="sexe" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in sexes %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="sens" class="form-label">Sens :</label>
+    <select name="sens" id="sens" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in sens %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="geo" class="form-label">GEO_DSG :</label>
+    <select name="geo" id="geo" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in geo %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="ufa" class="form-label">LIB_UFA :</label>
+    <select name="ufa" id="ufa" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in ufa %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="college" class="form-label">COLLEGE :</label>
+    <select name="college" id="college" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in college %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="echelle" class="form-label">ECHELLE :</label>
+    <select name="echelle" id="echelle" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in echelle %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="fonction" class="form-label">FONCTION :</label>
+    <select name="fonction" id="fonction" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in fonction %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="emploi" class="form-label">EMPLOI :</label>
+    <select name="emploi" id="emploi" class="form-select" required>
+      <option value="" disabled selected>--Choisissez--</option>
+      {% for item in emploi %}
+        <option value="{{ item }}">{{ item }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-sn w-100">Prédire</button>
+</form>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #D9B300;">
+        <h5 class="modal-title text-dark" id="resultModalLabel">Résultat de la Prédiction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- Résultat injecté ici -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sn" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  fetch("{% url 'form_predict_turnover' %}", {
+    method: 'POST',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+    },
+    body: formData,
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('modalBodyContent').innerHTML = data.html;
+    let modal = new bootstrap.Modal(document.getElementById('resultModal'));
+    modal.show();
+  })
+  .catch(() => alert("Erreur lors de la prédiction."));
+});
+</script>
+
+{% endblock %}

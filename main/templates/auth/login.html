@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+  <h2 class="mb-4 text-center">Connexion</h2>
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      Nom d'utilisateur ou mot de passe incorrect.
+    </div>
+  {% endif %}
+  <form method="POST" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Nom d'utilisateur</label>
+      <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" name="password" class="form-control" required>
+    </div>
+    <p><a href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
+    <p>Pas encore de compte ? <a href="{% url 'signup' %}">Inscris-toi ici</a></p>
+    <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+  </form>
+</div>
+{% endblock %}

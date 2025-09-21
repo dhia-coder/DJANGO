@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+<h1>Créer un compte</h1>
+<form method="POST" class="w-50 mx-auto">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-success">S'inscrire</button>
+</form>
+<p class="text-center mt-3">
+  Tu as déjà un compte ? <a href="{% url 'login' %}">Connecte-toi ici</a>.
+</p>
+{% endblock %}

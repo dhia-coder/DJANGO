@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Accueil - SNDP Agil{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+  <h1 class="display-5 fw-bold text-dark">Bienvenue sur la plateforme BI & ML de la SNDP Agil</h1>
+  <p class="lead text-muted">Explorez vos modèles d’intelligence artificielle, visualisez les analyses et accédez aux tableaux de bord.</p>
+</div>
+
+<div class="row justify-content-center">
+  <!-- Carte 1 -->
+  <div class="col-md-4 mb-4">
+    <div class="card shadow rounded border-0 h-100">
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold">🔍 Prédiction du Turnover</h5>
+        <p class="card-text text-muted">Analysez les départs potentiels des employés grâce à un modèle de classification.</p>
+        <a href="{% url 'form_predict_turnover' %}" class="btn btn-warning text-dark fw-bold" style="background-color: #D9B300;">Lancer</a>
+      </div>
+    </div>
+  </div>
+
+   <!-- Carte 3 -->
+  <div class="col-md-4 mb-4">
+    <div class="card shadow rounded border-0 h-100">
+      <div class="card-body text-center">
+        <h5 class="card-title fw-bold">📑 Est-ce que ce CV matche ?</h5>
+        <p class="card-text text-muted">Déposez un CV et découvrez instantanément s’il est adapté au poste ciblé.</p>
+        <a href="{% url 'cv_check' %}" class="btn btn-warning text-dark fw-bold" style="background-color: #D9B300;">Lancer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ajoute ici d'autres modèles -->
+</div>
+{% endblock %}

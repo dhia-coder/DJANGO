@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Vérification de CV{% endblock %}
+{% block content %}
+<h2>Uploader un CV (PDF)</h2>
+
+<form method="post" enctype="multipart/form-data" class="mt-3">
+    {% csrf_token %}
+    <input type="file" name="cv" accept=".pdf" class="form-control" required>
+    <button type="submit" class="btn btn-sn mt-3">Vérifier</button>
+</form>
+
+{% if result %}
+    <div class="alert alert-success mt-4">
+        <h4>Résultat : {{ result }}</h4>
+        <p><strong>Mots-clés détectés :</strong> {{ keywords|join:", " }}</p>
+    </div>
+{% endif %}
+{% endblock %}

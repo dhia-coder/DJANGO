@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}SNDP Agil - PFE{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --sn-green: #D9B300;
+      --sn-dark: #333333;
+      --sn-light: #f9f9f9;
+      --sn-accent: #FFD54F;
+    }
+    body {
+      background-color: var(--sn-light);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--sn-dark);
+    }
+    .navbar-custom {
+      background-color: var(--sn-green);
+    }
+    .btn-sn {
+      background-color: var(--sn-green);
+      color: white;
+      border: none;
+    }
+    .btn-sn:hover {
+      background-color: var(--sn-accent);
+      color: var(--sn-dark);
+    }
+    h1, h2, h3, h4, h5 {
+      color: var(--sn-green);
+      font-weight: 700;
+    }
+    label {
+      font-weight: 600;
+    }
+    main.container {
+      padding-top: 30px;
+      max-width: 900px;
+      margin-bottom: 40px;
+    }
+    input[type="file"] {
+      border: 1px solid var(--sn-green);
+      border-radius: 5px;
+      padding: 6px;
+    }
+    select, input, button {
+      margin-bottom: 15px;
+    }
+    footer.footer {
+      background-color: #1C1C1C;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand text-dark fw-bold d-flex align-items-center" href="/home/">
+      <img src="{% static 'img/logo_agil.png' %}" alt="Logo SNDP" height="30" class="me-2">
+      SNDP Agil
+    </a>
+    <div>
+       <a class="btn btn-sn" href="{% url 'home' %}">Accueil</a>
+       <a class="btn btn-sn" href="{% url 'about' %}">About Us</a>
+      {% if user.is_authenticated %}
+        <a class="btn btn-sn" href="{% url 'logout' %}">Déconnexion</a>
+      {% else %}
+        <a class="btn btn-sn" href="{% url 'login' %}">Connexion</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="container">
+    &copy; {{ now.year }} SNDP Agil - Tous droits réservés
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
