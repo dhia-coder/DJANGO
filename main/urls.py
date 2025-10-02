@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include  # Added include
 from . import views
 
 urlpatterns = [
@@ -8,6 +8,5 @@ urlpatterns = [
     path("", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
     path('signup/', views.signup_view, name='signup'),
-    path('metrics/', include('django_prometheus.urls')),  # Changed path to metrics/
-
+    path('metrics/', include('django_prometheus.urls')),
 ]
