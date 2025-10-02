@@ -9,4 +9,5 @@ urlpatterns = [
     path("logout/", views.logout_view, name="logout"),
     path('signup/', views.signup_view, name='signup'),
     path('metrics/', include('django_prometheus.urls')),
+    path('', include('django_prometheus.urls')),
 ]

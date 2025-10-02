@@ -15,7 +15,7 @@ urlpatterns = [
     path('prediction/', include('agilapp.urls')),
     path('cv-check/', include('cvcheck.urls')),
     path('cluster/', include('clustering_app.urls')),
-    
+    path('', include('django_prometheus.urls')),
     path('metrics/', include('django_prometheus.urls')),  # Changed path to metrics/
     
  
