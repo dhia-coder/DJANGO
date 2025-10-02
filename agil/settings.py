@@ -50,10 +50,11 @@ INSTALLED_APPS = [
     'cvcheck',
     'clustering_app',
     'main',
-    
+    'django_prometheus',  # Add this line
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',  # This must be first
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,7 +62,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',  # This must be last
 ]
+
+
 
 ROOT_URLCONF = 'agil.urls'
 
@@ -100,17 +104,7 @@ DATABASES = {
     }
 }
 
-MIDDLEWARE = [
-    'django_prometheus.middleware.PrometheusBeforeMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_prometheus.middleware.PrometheusAfterMiddleware',
-]
+
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -119,16 +113,7 @@ ALLOWED_HOSTS = [
     '*',  # Only use in development
 ]
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'main',
-    'django_prometheus',
-]
+
 
 
 # Password validation
