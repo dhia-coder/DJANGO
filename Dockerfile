@@ -14,9 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copier le reste du projet
 COPY . .
 
-# Copy entrypoint and make executable
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
 # Exposer le port de Django
 EXPOSE 8000
