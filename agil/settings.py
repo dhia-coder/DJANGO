@@ -112,6 +112,13 @@ MIDDLEWARE = [
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '172.17.0.1',  # Docker bridge network IP
+    '*',  # Only use in development
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
